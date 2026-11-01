@@ -14,6 +14,7 @@ import {
   Video,
 } from 'lucide-react';
 import { servicesData } from '@/data/services';
+import Link from 'next/link';
 
 const serviceIcons = {
   'performance-marketing': TrendingUp,
@@ -101,9 +102,9 @@ export default function Services() {
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
-            <a href="#contact" className="text-xs font-semibold uppercase tracking-wider text-cyan-200 transition hover:text-white">
+            <Link href="/contact" className="text-xs font-semibold uppercase tracking-wider text-cyan-200 transition hover:text-white">
               Talk about it <ArrowRight className="ml-1 inline h-3.5 w-3.5" />
-            </a>
+            </Link>
           </div>
         </div>
 

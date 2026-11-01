@@ -52,8 +52,10 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
   const selectedPackage = useWatch({ control, name: 'packagePlan' });
 
   useEffect(() => {
-    if (initialSelectedPackage) {
-      setValue('packagePlan', initialSelectedPackage);
+    const requestedPlan = new URLSearchParams(window.location.search).get('plan');
+    const plan = initialSelectedPackage || requestedPlan;
+    if (plan && pricingConfig.plans.some((pricingPlan) => pricingPlan.name === plan)) {
+      setValue('packagePlan', plan);
     }
   }, [initialSelectedPackage, setValue]);
 

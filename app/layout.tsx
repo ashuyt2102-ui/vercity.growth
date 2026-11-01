@@ -100,7 +100,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} dark`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${spaceGrotesk.variable} dark`}>
       <head>
         <script
           type="application/ld+json"

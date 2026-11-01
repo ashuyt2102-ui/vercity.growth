@@ -22,11 +22,13 @@ export default function Footer() {
         </Link>
 
         <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-gray-400">
-          <Link href="/#services" className="transition hover:text-white">Services</Link>
-          <Link href="/#pricing" className="transition hover:text-white">Plans</Link>
-          <Link href="/#about" className="transition hover:text-white">About</Link>
+          <Link href="/services" className="transition hover:text-white">Services</Link>
+          <Link href="/results" className="transition hover:text-white">Results</Link>
+          <Link href="/stories" className="transition hover:text-white">Stories</Link>
+          <Link href="/pricing" className="transition hover:text-white">Plans</Link>
+          <Link href="/about" className="transition hover:text-white">About</Link>
           <Link href="/founders" className="transition hover:text-white">Founders</Link>
-          <Link href="/#contact" className="transition hover:text-white">Contact</Link>
+          <Link href="/contact" className="transition hover:text-white">Contact</Link>
         </nav>
 
         <div className="flex items-center gap-4">

@@ -22,6 +22,7 @@ Built with a dark, high-contrast, futuristic design language for VERCITY GROWTH.
   - Answers agency, service, and pricing questions using the site's configured information.
   - Consultation requests use the existing validated contact workflow.
   - The Gemini API key stays server-side; chat requests are validated and rate-limited.
+- **Dedicated site pages**: Home, Services, Results, Stories, Pricing, About, Founders, and Contact each have a direct page route.
 - **Centralized Data Layer**: All services, demo projects, pricing packages, FAQs, and agency info are cleanly separated under `/data`.
 
 ---

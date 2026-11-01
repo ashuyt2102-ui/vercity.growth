@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from 'lucide-react';
+import Link from 'next/link';
 import { pricingCategories, pricingConfig, type PricingTier } from '@/data/pricing';
 import Card3D from './3d/Card3D';
 
@@ -27,11 +28,6 @@ export default function Pricing({ onSelectPlan }: PricingProps) {
   const movePlan = (step: number) => {
     setDirection(step);
     setActiveIndex((index) => Math.min(Math.max(index + step, 0), filteredPlans.length - 1));
-  };
-
-  const handleSelect = (planName: string) => {
-    onSelectPlan?.(planName);
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -114,13 +110,13 @@ export default function Pricing({ onSelectPlan }: PricingProps) {
                   ))}
                 </ul>
 
-                <button
-                  type="button"
-                  onClick={() => handleSelect(activePlan.name)}
+                <Link
+                  href={`/contact?plan=${encodeURIComponent(activePlan.name)}`}
+                  onClick={() => onSelectPlan?.(activePlan.name)}
                   className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-300 to-blue-400 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-950 transition hover:brightness-110 sm:w-auto"
                 >
                   {activePlan.ctaText} <ArrowUpRight className="h-4 w-4" />
-                </button>
+                </Link>
               </motion.article>
             </AnimatePresence>
           </Card3D>

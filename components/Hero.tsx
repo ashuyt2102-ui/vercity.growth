@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
 import { agencyConfig } from '@/data/agency';
 
 const tickerItems = ['Make your next move', 'Creative that converts', 'Growth without guesswork'];
@@ -47,12 +48,12 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.28 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
           >
-            <a
-              href="#services"
+            <Link
+              href="/services"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-300 to-blue-400 px-6 py-3.5 text-sm font-bold text-slate-950 transition hover:brightness-110"
             >
               Explore the studio <ArrowDown className="h-4 w-4" />
-            </a>
+            </Link>
             <a
               href={agencyConfig.contact.whatsappUrl}
               target="_blank"
@@ -94,13 +95,13 @@ export default function Hero() {
             <span className="mt-1 block text-2xl font-black uppercase tracking-[0.12em] text-white sm:text-3xl">
               Portal
             </span>
-            <a
-              href="#pricing"
+            <Link
+              href="/pricing"
               aria-label="Explore plans"
               className="mx-auto mt-5 flex h-10 w-10 items-center justify-center rounded-full border border-cyan-200/50 bg-cyan-300/10 text-cyan-200 transition hover:scale-110 hover:bg-cyan-300/20"
             >
               <ArrowUpRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

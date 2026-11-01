@@ -263,7 +263,7 @@ export default function Book3D() {
                 </a>
 
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-gradient-to-r from-cyan-400 to-blue-500 text-black shadow-lg"
                 >
                   Book 10–15 Min Call &rarr;

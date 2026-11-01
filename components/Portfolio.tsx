@@ -223,7 +223,7 @@ export default function Portfolio() {
                   Want similar architecture for your brand?
                 </span>
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={() => setSelectedProject(null)}
                   className="px-6 py-2.5 text-xs font-bold uppercase rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg"
                 >

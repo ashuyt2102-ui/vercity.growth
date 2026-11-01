@@ -8,14 +8,14 @@ import { Menu, X, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { agencyConfig } from '@/data/agency';
 
 const NAV_LINKS = [
-  { name: 'Home', href: '/#home' },
-  { name: 'Services', href: '/#services' },
-  { name: 'Results', href: '/#results' },
-  { name: 'Stories', href: '/#testimonials' },
-  { name: 'Pricing', href: '/#pricing' },
-  { name: 'About', href: '/#about' },
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services' },
+  { name: 'Results', href: '/results' },
+  { name: 'Stories', href: '/stories' },
+  { name: 'Pricing', href: '/pricing' },
+  { name: 'About', href: '/about' },
   { name: 'Founders', href: '/founders' },
-  { name: 'Contact', href: '/#contact' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -63,13 +63,13 @@ export default function Navbar() {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-1 lg:gap-2 px-3 py-1.5 rounded-full bg-[#0d101a]/70 border border-white/[0.08] backdrop-blur-xl shadow-inner">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 className="px-3.5 py-1.5 text-xs font-medium text-gray-300 hover:text-white hover:bg-white/[0.08] rounded-full transition-all duration-200"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -85,13 +85,13 @@ export default function Navbar() {
               <span>+91 88513 84747</span>
             </a>
 
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="relative inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-wide uppercase text-black font-black rounded-full bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 hover:opacity-95 shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <span>10–15 Min Call</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -119,14 +119,14 @@ export default function Navbar() {
           >
             <div className="flex flex-col gap-4">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-sm font-medium text-gray-300 hover:text-white py-1"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
 
               <div className="pt-4 border-t border-white/[0.08] flex flex-col gap-3">
@@ -140,13 +140,13 @@ export default function Navbar() {
                   <span>WhatsApp: +91 88513 84747</span>
                 </a>
 
-                <a
-                  href="#contact"
+                <Link
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full py-3.5 rounded-xl text-center text-xs font-black uppercase text-black bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300"
                 >
                   Book 10–15 Min Call
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>
