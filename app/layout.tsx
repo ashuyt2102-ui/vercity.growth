@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
+import AgentChat from '@/components/AgentChat';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -108,6 +109,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans bg-[#050608] text-gray-100 min-h-screen antialiased selection:bg-blue-600 selection:text-white">
         {children}
+        <AgentChat />
       </body>
     </html>
   );

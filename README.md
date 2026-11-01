@@ -18,6 +18,10 @@ Built with a dark, high-contrast, futuristic design language for VERCITY GROWTH.
   - Server-side persistence with **Supabase**.
   - Transactional HTML notification emails via **Resend**.
   - Celebratory confetti feedback upon verified dispatch.
+- **Gemini-powered website assistant**:
+  - Answers agency, service, and pricing questions using the site's configured information.
+  - Consultation requests use the existing validated contact workflow.
+  - The Gemini API key stays server-side; chat requests are validated and rate-limited.
 - **Centralized Data Layer**: All services, demo projects, pricing packages, FAQs, and agency info are cleanly separated under `/data`.
 
 ---
@@ -100,9 +104,15 @@ SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 RESEND_API_KEY=re_your_resend_api_key
 CONTACT_NOTIFICATION_EMAIL=admin@vercitygrowth.com
 FROM_EMAIL=onboarding@resend.dev
+
+# Google Gemini website assistant (required for live AI replies)
+GEMINI_API_KEY=your-google-ai-studio-api-key
+GEMINI_MODEL=gemini-2.5-flash
 ```
 
-*(Note: If API keys are omitted in development mode, the form executes smoothly with verified simulated delivery and logging).*
+Add `GEMINI_API_KEY` to `.env.local` for local use and to the hosting provider's server-side environment variables for deployment. Do not use a `NEXT_PUBLIC_` prefix. Without the key, the contact form continues to work, but the AI assistant displays a configuration message instead of generating replies.
+
+*(Note: If contact API keys are omitted in development mode, the form uses the existing simulated delivery behavior and logging.)*
 
 ### 4. Supabase Table Setup (SQL)
 
