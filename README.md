@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VERCITY GROWTH — Premium 3D Digital Marketing Agency
 
-## Getting Started
+An award-winning, production-grade 3D digital marketing agency portfolio engineered for **VERCITY GROWTH** ("We Engineer Digital Growth").
 
-First, run the development server:
+Built with a dark, high-contrast, futuristic design language for VERCITY GROWTH.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Key Highlights & Architecture
+
+- **Next.js App Router (16+) & React 19**: Server Components, streaming prerender, edge routing, optimized assets.
+- **Three.js & React Three Fiber + Drei**: Interactive 3D Growth Core sculpture reacting to cursor coordinate delta and ambient lighting.
+- **TypeScript & Tailwind CSS**: Consistent design tokens, glassmorphism (`glass-panel`), radial dark vignettes, and futuristic gradients.
+- **Framer Motion & Micro-interactions**: Smooth modal viewports, category filtering tabs, accordions, and magnetic transitions.
+- **Robust End-to-End Contact Engine**:
+  - Validated with **Zod** and **React Hook Form**.
+  - Rate limiting & anti-spam honeypot protection.
+  - Server-side persistence with **Supabase**.
+  - Transactional HTML notification emails via **Resend**.
+  - Celebratory confetti feedback upon verified dispatch.
+- **Centralized Data Layer**: All services, demo projects, pricing packages, FAQs, and agency info are cleanly separated under `/data`.
+
+---
+
+## 📂 Project Directory Structure
+
+```text
+vercity-growth/
+├── app/
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts         # Secure server-side enquiry handler (Supabase + Resend)
+│   ├── globals.css              # Dark theme design tokens & glassmorphism classes
+│   ├── layout.tsx               # Root layout with SEO metadata & JSON-LD Schema
+│   ├── page.tsx                 # Main agency landing page
+│   ├── robots.ts                # Dynamic robots.txt
+│   └── sitemap.ts               # Dynamic XML sitemap
+├── components/
+│   ├── 3d/
+│   │   └── GrowthCanvas.tsx     # React Three Fiber interactive 3D sculpture & particles
+│   ├── Navbar.tsx               # Glass sticky navbar with mobile drawer
+│   ├── Hero.tsx                 # Cinematic hero with 3D viewport
+│   ├── Scene3D.tsx              # Dynamic SSR-safe 3D container
+│   ├── TrustIntro.tsx           # Agency introduction & value propositions
+│   ├── Services.tsx             # 6 Interactive services with expandable details drawer
+│   ├── Portfolio.tsx            # Categorized portfolio with full-screen case-study previews
+│   ├── CaseStudies.tsx          # Strategic growth pillars & truth metrics
+│   ├── Pricing.tsx              # Transparent pricing cards with instant prefill CTA
+│   ├── Process.tsx              # 4-step execution timeline
+│   ├── About.tsx                # Agency DNA, mission, and philosophy
+│   ├── Testimonials.tsx         # Client feedback carousel
+│   ├── FAQ.tsx                  # Interactive accordion
+│   ├── Contact.tsx              # Full enquiry form with validation & hotline channels
+│   └── Footer.tsx               # Comprehensive agency footer with dynamic year
+├── data/
+│   ├── agency.ts                # Central brand, hotline, social, and location config
+│   ├── faq.ts                   # Centralized FAQ items
+│   ├── pricing.ts               # 4 Tiers (Starter, Growth, Scale, Custom)
+│   ├── projects.ts              # 6 Case study architectures (Demo labelled)
+│   ├── services.ts              # 6 Service definitions & deliverables
+│   └── testimonials.ts          # Sample client reviews
+├── lib/
+│   ├── email.ts                 # Resend client helper
+│   ├── supabase.ts              # Supabase admin client
+│   ├── utils.ts                 # Classname merge utility
+│   └── validations.ts           # Zod schema for form validation
+├── .env.example                 # Environment configuration template
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Prerequisites
+- Node.js `v18+` or `v20+` (Tested on `v24`)
+- npm or pnpm
 
-## Learn More
+### 2. Installation
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd C:\Users\Admin\.gemini\antigravity\scratch\vercity-growth
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Environment Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` to `.env.local`:
 
-## Deploy on Vercel
+```bash
+cp .env.example .env.local
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Configure your credentials:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+RESEND_API_KEY=re_your_resend_api_key
+CONTACT_NOTIFICATION_EMAIL=admin@vercitygrowth.com
+FROM_EMAIL=onboarding@resend.dev
+```
+
+*(Note: If API keys are omitted in development mode, the form executes smoothly with verified simulated delivery and logging).*
+
+### 4. Supabase Table Setup (SQL)
+
+In your Supabase SQL Editor, run:
+
+```sql
+create table if not exists enquiries (
+  id uuid default gen_random_uuid() primary key,
+  full_name text not null,
+  email text not null,
+  phone text not null,
+  company text not null,
+  service text not null,
+  package_plan text not null,
+  budget text not null,
+  project_details text not null,
+  ip_address text,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+```
+
+### 5. Running the Application
+
+```bash
+# Development server:
+npm run dev
+
+# Production build & run:
+npm run build
+npm run start
+```
+
+Visit `http://localhost:3000` in your browser.
