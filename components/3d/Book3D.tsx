@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, BookOpen, Camera, Sparkles, TrendingUp, Code2, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Camera, Sparkles, TrendingUp, Code2, ArrowUpRight } from 'lucide-react';
 import { agencyConfig } from '@/data/agency';
 
 export default function Book3D() {
@@ -79,7 +79,7 @@ export default function Book3D() {
 
               <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between">
                 <div className="text-xs font-mono text-gray-400">
-                  Curated by <span className="text-white font-semibold">Akash Kaushal</span> &amp; <span className="text-white font-semibold">Ayush Shukla</span>
+                  Curated by <span className="text-white font-semibold">VERCITY GROWTH</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-cyan-400 group-hover:text-cyan-300 font-bold">
                   <span>Click To Open Playbook</span>
@@ -147,7 +147,7 @@ export default function Book3D() {
                   </div>
 
                   <div className="text-[11px] font-mono text-gray-500">
-                    Included in our ₹50,000/mo Complete Growth Package.
+                    Included in our ₹35,000/mo Complete Growth Package.
                   </div>
                 </div>
               </div>
@@ -179,8 +179,8 @@ export default function Book3D() {
                     </p>
                     <div className="space-y-1.5 text-xs font-mono text-gray-400">
                       <div>&bull; Starter Plan (Basic): ₹20,000/mo</div>
-                      <div>&bull; Growth Plan (Pro): ₹30,000/mo</div>
-                      <div>&bull; Complete Growth Package: ₹50,000/mo</div>
+                      <div>&bull; Growth Plan (Pro): ₹25,000/mo</div>
+                      <div>&bull; Complete Growth Package: ₹35,000/mo</div>
                       <div>&bull; Server-Side CAPI Tracking &amp; Attribution</div>
                     </div>
                   </div>
@@ -248,13 +248,6 @@ export default function Book3D() {
                     <span className="text-xs font-mono text-cyan-400">+91 88513 84747</span>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] font-mono uppercase text-gray-400 block">Brand Partnerships</span>
-                      <span className="text-sm font-bold text-white font-mono">Ayush Shukla</span>
-                    </div>
-                    <span className="text-xs font-mono text-cyan-400">vercitygrowth@gmail.com</span>
-                  </div>
                 </div>
               </div>
 

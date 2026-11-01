@@ -13,38 +13,16 @@ export interface PricingTier {
 }
 
 export const pricingCategories = [
-  { id: 'all', label: 'All Packages' },
-  { id: 'performance', label: 'Performance Marketing (Ads)' },
-  { id: 'photoshoot', label: 'Photo Shoot (From ₹10,000)' },
-  { id: 'social', label: 'Social Media Management' },
-  { id: 'web', label: 'Web Development' },
+  { id: 'performance', label: 'Performance ads' },
+  { id: 'photoshoot', label: 'Photo shoots' },
+  { id: 'social', label: 'Social media' },
+  { id: 'web', label: 'Web development' },
 ];
 
 export const pricingConfig = {
   currencyNotice: 'All agency management fees are in INR (₹). Ad spend is billed directly by Meta / Google to your own accounts. 100% direct account ownership.',
   plans: [
     // 1. Performance Marketing
-    {
-      id: 'performance-complete',
-      category: 'performance',
-      name: 'COMPLETE GROWTH PACKAGE',
-      price: '₹50,000',
-      period: '/Month',
-      tagline: 'The complete all-in-one performance marketing & creative engine for ambitious D2C brands.',
-      popular: true,
-      featured: true,
-      badge: '★ SIGNATURE PACKAGE',
-      deliverables: [
-        '✅ Meta Ads Management (Facebook & Instagram)',
-        '✅ Social Media Management & Brand Growth',
-        '✅ 2–3 Creatives Weekly (8–12 monthly high-CTR assets)',
-        '✅ Growth Strategy & Weekly Reporting',
-        'Server-Side CAPI Tracking & Custom Audience Exclusions',
-        'Direct 10–15 Min Weekly Strategy Calls with Akash Kaushal',
-        'Dedicated WhatsApp VIP Channel',
-      ],
-      ctaText: 'Book ₹50,000 Complete Package',
-    },
     {
       id: 'performance-starter',
       category: 'performance',
@@ -68,7 +46,7 @@ export const pricingConfig = {
       id: 'performance-growth',
       category: 'performance',
       name: 'Growth Plan (Pro)',
-      price: '₹30,000',
+      price: '₹25,000',
       period: '/Month',
       tagline: 'High-scale multi-campaign ads machine with aggressive A/B testing and ROAS scaling.',
       popular: true,
@@ -82,6 +60,27 @@ export const pricingConfig = {
         'Dedicated Senior Account Manager',
       ],
       ctaText: 'Select Growth Plan (Pro)',
+    },
+    {
+      id: 'performance-complete',
+      category: 'performance',
+      name: 'COMPLETE GROWTH PACKAGE',
+      price: '₹35,000',
+      period: '/Month',
+      tagline: 'The complete all-in-one performance marketing & creative engine for ambitious D2C brands.',
+      popular: true,
+      featured: true,
+      badge: '★ SIGNATURE PACKAGE',
+      deliverables: [
+        '✅ Meta Ads Management (Facebook & Instagram)',
+        '✅ Social Media Management & Brand Growth',
+        '✅ 2–3 Creatives Weekly (8–12 monthly high-CTR assets)',
+        '✅ Growth Strategy & Weekly Reporting',
+        'Server-Side CAPI Tracking & Custom Audience Exclusions',
+        'Direct 10–15 Min Weekly Strategy Calls with Akash Kaushal',
+        'Dedicated WhatsApp VIP Channel',
+      ],
+      ctaText: 'Book ₹35,000 Complete Package',
     },
 
     // 2. Photo Shoot Service (Starting from ₹10,000)

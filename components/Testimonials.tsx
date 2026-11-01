@@ -19,8 +19,8 @@ export default function Testimonials() {
   const current = testimonialsData[currentIndex];
 
   return (
-    <section className="py-24 relative overflow-hidden bg-[#050608] border-t border-white/[0.06]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="testimonials" className="relative scroll-mt-24 overflow-hidden border-t border-white/[0.06] px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-5xl">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-blue-500/20 bg-blue-500/5 text-xs font-mono uppercase tracking-widest text-cyan-400 mb-4">
@@ -35,7 +35,7 @@ export default function Testimonials() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative rounded-3xl p-8 sm:p-12 bg-[#0c101c] border border-white/[0.08] shadow-2xl">
+        <div className="relative rounded-2xl border border-white/[0.08] bg-[#0c101c]/90 p-5 shadow-2xl backdrop-blur-xl sm:rounded-3xl sm:p-8 lg:p-12">
           <Quote className="absolute top-6 right-8 w-16 h-16 text-blue-500/10 pointer-events-none" />
 
           <AnimatePresence mode="wait">
@@ -45,17 +45,10 @@ export default function Testimonials() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="flex flex-col md:flex-row items-center gap-8 md:gap-12"
+              className="flex flex-col items-center gap-6 md:flex-row md:gap-10"
             >
-              {/* Photo & Role */}
+              {/* Reviewer details */}
               <div className="flex flex-col items-center text-center shrink-0">
-                <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-blue-500/40 shadow-xl shadow-blue-500/20 mb-4">
-                  <img
-                    src={current.image}
-                    alt={current.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <h4 className="text-base font-bold text-white">{current.name}</h4>
                 <p className="text-xs text-cyan-400 font-mono">{current.role}</p>
                 <p className="text-xs text-gray-500 font-mono">{current.company}</p>

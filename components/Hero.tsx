@@ -1,203 +1,122 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, CheckCircle2, MessageCircle, Sparkles, PhoneCall, Camera, BookOpen } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { agencyConfig } from '@/data/agency';
-import Card3D from './3d/Card3D';
+
+const tickerItems = ['Make your next move', 'Creative that converts', 'Growth without guesswork'];
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[94vh] flex items-center justify-center pt-28 pb-16 lg:py-24 overflow-hidden"
+      className="relative flex min-h-[92svh] scroll-mt-24 flex-col justify-center overflow-hidden px-4 pb-8 pt-28 sm:px-6 lg:px-8"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Typography & CTAs */}
-          <div className="lg:col-span-7 flex flex-col justify-center text-left">
-            {/* Top pill badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 backdrop-blur-md mb-6 w-fit shadow-lg shadow-cyan-500/10"
+      <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative z-10 py-12 text-center lg:text-left">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-5 text-xs font-mono uppercase tracking-[0.3em] text-cyan-300"
+          >
+            Vercity Growth · Digital studio
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.08 }}
+            className="mx-auto max-w-3xl text-4xl font-black uppercase leading-[1.04] tracking-tight text-white sm:text-6xl lg:mx-0 xl:text-7xl"
+          >
+            Step into your
+            <span className="mt-2 block bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-300 bg-clip-text text-transparent">
+              next growth era.
+            </span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.18 }}
+            className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg lg:mx-0"
+          >
+            Strategy, creative, and performance marketing—built to move your brand forward.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.28 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+          >
+            <a
+              href="#services"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-300 to-blue-400 px-6 py-3.5 text-sm font-bold text-slate-950 transition hover:brightness-110"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
-              </span>
-              <span className="text-xs font-mono tracking-widest text-cyan-300 uppercase">
-                D2C Fashion &bull; Lifestyle &bull; Creative Studio
-              </span>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-6xl xl:text-7xl font-black tracking-tight leading-[1.05] uppercase text-white mb-6 font-mono"
+              Explore the studio <ArrowDown className="h-4 w-4" />
+            </a>
+            <a
+              href={agencyConfig.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/[0.08]"
             >
-              WE ENGINEER <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">
-                DIGITAL GROWTH.
-              </span>
-            </motion.h1>
+              <MessageCircle className="h-4 w-4 text-cyan-300" /> Let&apos;s talk
+            </a>
+          </motion.div>
+        </div>
 
-            {/* Supporting Subtext */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl font-light leading-relaxed mb-6"
+        <div className="relative mx-auto flex h-[330px] w-full max-w-[440px] items-center justify-center sm:h-[440px]">
+          <div className="absolute h-56 w-56 rounded-full bg-cyan-500/20 blur-[90px] sm:h-72 sm:w-72" />
+          <motion.div
+            aria-hidden="true"
+            animate={{ rotateY: [0, 360], rotateZ: [0, 8, 0] }}
+            transition={{ rotateY: { duration: 28, repeat: Infinity, ease: 'linear' }, rotateZ: { duration: 9, repeat: Infinity, ease: 'easeInOut' } }}
+            className="absolute h-[250px] w-[178px] rounded-[50%] border border-cyan-300/70 shadow-[0_0_30px_rgba(34,211,238,0.2),inset_0_0_28px_rgba(34,211,238,0.14)] sm:h-[340px] sm:w-[242px]"
+            style={{ transformStyle: 'preserve-3d', perspective: '900px' }}
+          >
+            <div className="absolute inset-3 rounded-[50%] border border-blue-400/50" />
+            <div className="absolute inset-7 rounded-[50%] border border-indigo-300/40" />
+            <div className="absolute inset-0 rounded-[50%] bg-gradient-to-b from-cyan-300/[0.08] via-transparent to-indigo-400/[0.12]" />
+          </motion.div>
+          <motion.div
+            aria-hidden="true"
+            animate={{ rotate: [0, -360] }}
+            transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
+            className="absolute h-[290px] w-[210px] rounded-[50%] border border-dashed border-blue-300/35 sm:h-[392px] sm:w-[280px]"
+            style={{ transform: 'rotateX(68deg)' }}
+          />
+          <div className="relative z-10 text-center" style={{ transform: 'translateZ(40px)' }}>
+            <span className="block text-[10px] font-mono uppercase tracking-[0.35em] text-cyan-200/80">
+              Enter the
+            </span>
+            <span className="mt-2 block text-2xl font-black uppercase tracking-[0.12em] text-white sm:text-3xl">
+              Growth
+            </span>
+            <span className="mt-1 block text-2xl font-black uppercase tracking-[0.12em] text-white sm:text-3xl">
+              Portal
+            </span>
+            <a
+              href="#pricing"
+              aria-label="Explore plans"
+              className="mx-auto mt-5 flex h-10 w-10 items-center justify-center rounded-full border border-cyan-200/50 bg-cyan-300/10 text-cyan-200 transition hover:scale-110 hover:bg-cyan-300/20"
             >
-              We scale D2C fashion &amp; lifestyle brands through high-converting Meta Ads, commercial studio product photo shoots, and high-performance digital storefronts.
-            </motion.p>
-
-            {/* Photo Shoot & Signature Highlight Banner */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="mb-8 p-4 rounded-xl bg-[#090d18]/80 border border-cyan-500/30 backdrop-blur-md max-w-xl"
-            >
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 mt-0.5">
-                  <Camera className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-300 font-semibold mb-1">
-                    Studio Product Photo Shoots &bull; Starting from ₹10,000
-                  </h4>
-                  <p className="text-xs text-gray-300 font-light leading-relaxed">
-                    Commercial on-model lifestyle and studio product photography with 3–5 day delivery. Engineered specifically for high-converting Meta Ads and lookbooks.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Key Value Micro-list */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-4 sm:gap-6 mb-10 text-xs sm:text-sm text-gray-400 font-mono"
-            >
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                <span>Meta Ads Management</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-blue-400" />
-                <span>2–3 Creatives (Weekly)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-indigo-400" />
-                <span>Product Shoots (From ₹10,000)</span>
-              </div>
-            </motion.div>
-
-            {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="flex flex-wrap items-center gap-4"
-            >
-              <a
-                href="#pricing"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-xs sm:text-sm font-black tracking-wider uppercase text-black bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 hover:opacity-95 shadow-xl shadow-cyan-500/25 transition-all duration-300 hover:scale-[1.02]"
-              >
-                <span>View Plans (From ₹10,000)</span>
-                <ArrowUpRight className="w-4 h-4 text-black" />
-              </a>
-
-              <a
-                href="#playbook"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs sm:text-sm font-semibold tracking-wider uppercase text-cyan-300 border border-cyan-500/30 hover:border-cyan-500/60 bg-cyan-950/20 hover:bg-cyan-900/30 backdrop-blur-md transition-all duration-300"
-              >
-                <BookOpen className="w-4 h-4 text-cyan-400" />
-                <span>Open 3D Playbook</span>
-              </a>
-
-              <a
-                href={agencyConfig.contact.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider text-emerald-300 border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-950/20 hover:bg-emerald-900/30 backdrop-blur-md transition-all duration-300"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
-                <span>WhatsApp Akash</span>
-              </a>
-            </motion.div>
-
-            {/* Direct access tag */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="mt-8 flex items-center gap-4 text-xs font-mono text-gray-400"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Direct Strategy: Akash Kaushal (+91 88513 84747) &bull; Partnerships: Ayush Shukla</span>
-            </motion.div>
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
+        </div>
+      </div>
 
-          {/* Right Column: 3D Perspective Visual Spotlight */}
-          <div className="lg:col-span-5 relative w-full flex items-center justify-center">
-            <Card3D intensity={12} className="w-full max-w-md">
-              <div className="relative rounded-3xl p-8 bg-gradient-to-br from-[#0c1222]/90 via-[#0a0e1c]/80 to-[#060810]/95 border border-cyan-500/30 shadow-[0_20px_60px_-15px_rgba(6,182,212,0.25)] backdrop-blur-2xl">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-                    Vercity Growth Suite
-                  </span>
-                  <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span>Onboarding Q4</span>
-                  </span>
-                </div>
-
-                <h3 className="text-2xl font-black uppercase text-white font-mono mb-4">
-                  D2C PERFORMANCE &amp; CREATIVE MATRIX
-                </h3>
-
-                <div className="space-y-3 mb-6">
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs text-white font-medium block">Studio Product Photo Shoot</span>
-                      <span className="text-[11px] font-mono text-cyan-400">Commercial E-Commerce Visuals</span>
-                    </div>
-                    <span className="text-sm font-black font-mono text-white">From ₹10,000</span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs text-white font-medium block">Complete Growth Package</span>
-                      <span className="text-[11px] font-mono text-cyan-300">Ads + Social + Weekly Creatives</span>
-                    </div>
-                    <span className="text-sm font-black font-mono text-cyan-300">₹50,000/mo</span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs text-white font-medium block">Custom Shopify / Next.js</span>
-                      <span className="text-[11px] font-mono text-cyan-400">High-Converting Stores</span>
-                    </div>
-                    <span className="text-sm font-black font-mono text-white">From ₹50,000</span>
-                  </div>
-                </div>
-
-                <a
-                  href="#contact"
-                  className="w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider bg-gradient-to-r from-cyan-400 to-blue-500 text-black flex items-center justify-center gap-2 hover:opacity-95 shadow-lg"
-                >
-                  <span>Book 10–15 Min Strategy Call</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
-            </Card3D>
-          </div>
+      <div className="relative mx-auto mt-5 w-full max-w-7xl overflow-hidden border-y border-white/10 py-3">
+        <div className="portal-marquee flex w-max items-center gap-8 whitespace-nowrap">
+          {[...tickerItems, ...tickerItems].map((item, index) => (
+            <span
+              key={`${item}-${index}`}
+              aria-hidden={index >= tickerItems.length}
+              className="flex items-center gap-8 text-[11px] font-mono uppercase tracking-[0.22em] text-gray-300/80 sm:text-xs"
+            >
+              {item}
+              <span className="text-cyan-300">✳</span>
+            </span>
+          ))}
         </div>
       </div>
     </section>

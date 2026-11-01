@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import {
@@ -11,14 +11,13 @@ import {
   Mail,
   Phone,
   MessageSquare,
-  Clock,
-  Sparkles,
   Loader2,
   Camera,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { contactFormSchema, ContactFormData } from '@/lib/validations';
 import { agencyConfig } from '@/data/agency';
+import { pricingConfig } from '@/data/pricing';
 import Card3D from './3d/Card3D';
 
 interface ContactProps {
@@ -33,6 +32,7 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
     register,
     handleSubmit,
     setValue,
+    control,
     reset,
     formState: { errors },
   } = useForm<ContactFormData>({
@@ -43,12 +43,13 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
       phone: '',
       company: '',
       service: 'Performance Marketing (Meta Ads)',
-      packagePlan: initialSelectedPackage || 'COMPLETE GROWTH PACKAGE (₹50,000/mo)',
-      budget: '₹50,000 / month (Complete Package)',
+      packagePlan: initialSelectedPackage || 'COMPLETE GROWTH PACKAGE',
+      budget: '₹35,000 / month (Complete Package)',
       projectDetails: '',
       websiteHp: '',
     },
   });
+  const selectedPackage = useWatch({ control, name: 'packagePlan' });
 
   useEffect(() => {
     if (initialSelectedPackage) {
@@ -76,7 +77,7 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
       }
 
       setSubmissionStatus('success');
-      setResponseMessage(result.message || 'Enquiry submitted successfully! Akash Kaushal or Ayush Shukla will contact you within 24 hours.');
+      setResponseMessage(result.message || 'Enquiry submitted successfully! Our team will contact you within 24 hours.');
 
       try {
         confetti({
@@ -97,7 +98,7 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden border-t border-white/[0.06]">
+    <section id="contact" className="scroll-mt-24 py-16 relative overflow-hidden border-t border-white/[0.06] sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -220,7 +221,7 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
           {/* Right Column: Complete Interactive Enquiry Form */}
           <div className="lg:col-span-7">
             <Card3D intensity={8} glowColor="rgba(6, 182, 212, 0.2)">
-              <div className="p-8 sm:p-10 rounded-3xl bg-[#0a0d16]/90 border border-white/[0.09] backdrop-blur-2xl shadow-2xl">
+              <div className="p-5 sm:p-8 lg:p-10 rounded-3xl bg-[#0a0d16]/90 border border-white/[0.09] backdrop-blur-2xl shadow-2xl">
                 {/* Status Messages */}
                 {submissionStatus === 'success' && (
                   <motion.div
@@ -359,38 +360,14 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
                       </label>
                       <select
                         {...register('packagePlan')}
+                        value={selectedPackage}
                         className="w-full px-4 py-3.5 rounded-xl bg-[#0c101c] border border-cyan-500/30 text-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all"
                       >
-                        <option value="COMPLETE GROWTH PACKAGE (₹50,000/mo)">
-                          ★ COMPLETE GROWTH PACKAGE (₹50,000/mo)
-                        </option>
-                        <option value="STUDIO PRODUCT SHOOT (From ₹10,000)">
-                          STUDIO PRODUCT SHOOT (From ₹10,000)
-                        </option>
-                        <option value="FASHION & MODEL LOOKBOOK (₹25,000)">
-                          FASHION & MODEL LOOKBOOK (₹25,000)
-                        </option>
-                        <option value="Growth Plan (Pro) (₹30,000/mo)">
-                          Growth Plan (Pro) (₹30,000/mo)
-                        </option>
-                        <option value="Starter Plan (Basic) (₹20,000/mo)">
-                          Starter Plan (Basic) (₹20,000/mo)
-                        </option>
-                        <option value="Social Essential Plan (₹15,000/mo)">
-                          Social Essential Plan (₹15,000/mo)
-                        </option>
-                        <option value="Authority Social Plan (₹25,000/mo)">
-                          Authority Social Plan (₹25,000/mo)
-                        </option>
-                        <option value="Standard E-Commerce Web (₹25,000)">
-                          Standard E-Commerce Web (₹25,000)
-                        </option>
-                        <option value="Premium E-Commerce Web (₹50,000)">
-                          Premium E-Commerce Web (₹50,000)
-                        </option>
-                        <option value="Enterprise Web Solution (₹1,00,000)">
-                          Enterprise Web Solution (₹1,00,000)
-                        </option>
+                        {pricingConfig.plans.map((plan) => (
+                          <option key={plan.id} value={plan.name}>
+                            {plan.name} · {plan.price} {plan.period}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -405,9 +382,10 @@ export default function Contact({ initialSelectedPackage }: ContactProps) {
                       className="w-full px-4 py-3.5 rounded-xl bg-[#0c101c] border border-white/10 text-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all"
                     >
                       <option value="₹10,000 – ₹20,000 (Photo Shoot / Starter)">₹10,000 – ₹20,000 (Photo Shoot / Starter)</option>
-                      <option value="₹50,000 / month (Complete Package)">₹50,000 / month (Complete Package)</option>
-                      <option value="₹25,000 – ₹50,000 / month">₹25,000 – ₹50,000 / month</option>
-                      <option value="₹50,000 – ₹1,50,000 / month">₹50,000 – ₹1,50,000 / month</option>
+                      <option value="₹20,000 – ₹25,000 / month">₹20,000 – ₹25,000 / month</option>
+                      <option value="₹25,000 – ₹35,000 / month">₹25,000 – ₹35,000 / month</option>
+                      <option value="₹35,000 / month (Complete Package)">₹35,000 / month (Complete Package)</option>
+                      <option value="₹35,000 – ₹1,50,000 / month">₹35,000 – ₹1,50,000 / month</option>
                       <option value="₹1,50,000+ / month (Enterprise Scale)">₹1,50,000+ / month (Enterprise Scale)</option>
                     </select>
                   </div>

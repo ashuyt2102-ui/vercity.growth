@@ -4,17 +4,18 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, MessageCircle, BookOpen } from 'lucide-react';
+import { Menu, X, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { agencyConfig } from '@/data/agency';
 
 const NAV_LINKS = [
-  { name: 'Home', href: '#home' },
-  { name: '3D Playbook', href: '#playbook' },
-  { name: 'Services', href: '#services' },
-  { name: 'Our Work', href: '#work' },
-  { name: 'Pricing', href: '#pricing' },
-  { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/#home' },
+  { name: 'Services', href: '/#services' },
+  { name: 'Results', href: '/#results' },
+  { name: 'Stories', href: '/#testimonials' },
+  { name: 'Pricing', href: '/#pricing' },
+  { name: 'About', href: '/#about' },
+  { name: 'Founders', href: '/founders' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
@@ -40,7 +41,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="#home" className="group flex items-center gap-2.5">
+          <Link href="/" className="group flex items-center gap-2.5">
             <Image
               src="/vercity-logo.jpg"
               alt=""

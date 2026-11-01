@@ -97,3 +97,19 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@keyframes portal-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.portal-marquee {
+  animation: portal-marquee 26s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-marquee {
+    animation-play-state: paused;
+  }
+}

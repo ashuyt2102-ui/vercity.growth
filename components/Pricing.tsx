@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Check, Sparkles, AlertCircle, ArrowUpRight, MessageCircle } from 'lucide-react';
-import { pricingConfig, pricingCategories, PricingTier } from '@/data/pricing';
-import { agencyConfig } from '@/data/agency';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from 'lucide-react';
+import { pricingCategories, pricingConfig, type PricingTier } from '@/data/pricing';
 import Card3D from './3d/Card3D';
 
 interface PricingProps {
@@ -12,187 +11,156 @@ interface PricingProps {
 }
 
 export default function Pricing({ onSelectPlan }: PricingProps) {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState(pricingCategories[0].id);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
 
-  const handleSelect = (planName: string) => {
-    if (onSelectPlan) {
-      onSelectPlan(planName);
-    }
-    const contactElem = document.getElementById('contact');
-    if (contactElem) {
-      contactElem.scrollIntoView({ behavior: 'smooth' });
-    }
+  const filteredPlans = pricingConfig.plans.filter((plan) => plan.category === activeCategory);
+  const activePlan: PricingTier = filteredPlans[activeIndex];
+
+  const chooseCategory = (category: string) => {
+    setActiveCategory(category);
+    setActiveIndex(0);
+    setDirection(1);
   };
 
-  const filteredPlans = activeCategory === 'all'
-    ? pricingConfig.plans
-    : pricingConfig.plans.filter((p) => p.category === activeCategory);
+  const movePlan = (step: number) => {
+    setDirection(step);
+    setActiveIndex((index) => Math.min(Math.max(index + step, 0), filteredPlans.length - 1));
+  };
+
+  const handleSelect = (planName: string) => {
+    onSelectPlan?.(planName);
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden border-t border-white/[0.06]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-xs font-mono uppercase tracking-widest text-cyan-400 mb-4">
-            Direct &bull; Transparent &bull; Results-Focused
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4 font-mono">
-            INVEST IN YOUR NEXT LEVEL.
-          </h2>
-          <p className="text-base sm:text-lg text-gray-300 font-light mb-4">
-            VERCITY GROWTH plans, commercial product photo shoots starting from ₹10,000, and high-ROAS ad management.
+    <section id="pricing" className="relative scroll-mt-24 overflow-hidden border-t border-white/[0.06] px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-9 text-center">
+          <p className="mb-3 text-xs font-mono uppercase tracking-[0.25em] text-cyan-300">Clear options. No clutter.</p>
+          <h2 className="text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">Find your plan</h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-gray-400">
+            Browse one plan at a time, then choose what fits your next move.
           </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300/90 font-mono">
-            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-            <span>Note: {pricingConfig.currencyNotice}</span>
+        </div>
+
+        <div className="mb-8 flex justify-center">
+          <div className="grid w-full max-w-2xl grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center">
+            {pricingCategories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                onClick={() => chooseCategory(category.id)}
+                aria-pressed={activeCategory === category.id}
+                className={`min-h-11 rounded-xl border px-3 py-2 text-xs transition sm:rounded-full sm:px-5 ${
+                  activeCategory === category.id
+                    ? 'border-cyan-300/50 bg-cyan-300 text-slate-950'
+                    : 'border-white/10 bg-white/[0.04] text-gray-300 hover:bg-white/[0.08]'
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Pricing Category Tabs */}
-        <div className="flex items-center justify-center gap-2 overflow-x-auto pb-4 mb-12 no-scrollbar">
-          {pricingCategories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider whitespace-nowrap transition-all duration-200 ${
-                activeCategory === cat.id
-                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-black shadow-lg shadow-cyan-500/30'
-                  : 'bg-white/[0.04] text-gray-400 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+        <div className="mx-auto grid max-w-4xl items-center gap-5 md:grid-cols-[auto_1fr_auto]">
+          <button
+            type="button"
+            onClick={() => movePlan(-1)}
+            disabled={activeIndex === 0}
+            aria-label="Previous plan"
+            className="hidden h-12 w-12 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-cyan-300/50 hover:text-cyan-200 disabled:cursor-not-allowed disabled:opacity-30 md:flex"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
 
-        {/* Pricing Cards Grid with 3D Tilt */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {filteredPlans.map((plan) => (
-            <div key={plan.id} className="h-full flex flex-col">
-              <Card3D
-                intensity={plan.featured ? 14 : 10}
-                glowColor={plan.featured ? 'rgba(56, 189, 248, 0.35)' : 'rgba(255, 255, 255, 0.1)'}
-                className="h-full flex-1"
+          <Card3D intensity={10} className="w-full">
+            <AnimatePresence mode="wait" initial={false} custom={direction}>
+              <motion.article
+                key={activePlan.id}
+                custom={direction}
+                initial={{ opacity: 0, x: direction * 32 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction * -32 }}
+                transition={{ duration: 0.22 }}
+                className="rounded-3xl border border-cyan-300/20 bg-[#080c16]/90 p-6 shadow-2xl shadow-cyan-950/20 backdrop-blur-xl sm:p-9"
               >
-                <div
-                  className={`relative rounded-3xl p-8 h-full flex flex-col justify-between backdrop-blur-xl transition-all duration-300 shadow-2xl ${
-                    plan.featured
-                      ? 'bg-gradient-to-b from-[#0f172a]/95 via-[#0d1326]/90 to-[#080b14]/95 border-2 border-cyan-400/80 shadow-cyan-500/20'
-                      : plan.category === 'photoshoot'
-                      ? 'bg-gradient-to-b from-[#131b2e]/90 via-[#0a0e1c]/80 to-[#060810]/90 border border-cyan-500/40'
-                      : 'bg-[#0a0d16]/85 border border-white/[0.09]'
-                  }`}
-                >
-                  {/* Badge */}
-                  {plan.badge && (
-                    <div
-                      className={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-white shadow-md flex items-center gap-1.5 font-mono whitespace-nowrap ${
-                        plan.featured
-                          ? 'bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 shadow-cyan-500/40 text-black font-black'
-                          : plan.category === 'photoshoot'
-                          ? 'bg-cyan-500 text-black font-black shadow-cyan-500/30'
-                          : 'bg-white/10 text-gray-300 border border-white/20'
-                      }`}
-                    >
-                      {plan.featured && <Sparkles className="w-3 h-3" />}
-                      <span>{plan.badge}</span>
-                    </div>
-                  )}
-
+                <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    {/* Plan Header */}
-                    <div className="flex items-center justify-between mb-2 mt-1">
-                      <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-400 font-semibold">
-                        {plan.category.toUpperCase()}
+                    <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-cyan-300">{activePlan.category}</p>
+                    <h3 className="mt-2 text-xl font-bold text-white sm:text-2xl">{activePlan.name}</h3>
+                    {activePlan.badge && (
+                      <span className="mt-3 inline-flex rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[10px] uppercase tracking-wider text-gray-300">
+                        {activePlan.badge}
                       </span>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-white mb-3">
-                      {plan.name}
-                    </h3>
-
-                    {/* Price Display */}
-                    <div className="flex items-baseline gap-1.5 mb-3">
-                      <span className="text-3xl sm:text-4xl font-black text-white font-mono">
-                        {plan.price}
-                      </span>
-                      {plan.period && (
-                        <span className="text-xs text-gray-400 font-mono">{plan.period}</span>
-                      )}
-                    </div>
-
-                    <p className="text-xs text-gray-300 font-light leading-relaxed mb-6 min-h-[44px]">
-                      {plan.tagline}
-                    </p>
-
-                    {/* Deliverables List */}
-                    <div className="space-y-2.5 mb-8 pt-4 border-t border-white/[0.08]">
-                      {plan.deliverables.map((item) => (
-                        <div key={item} className="flex items-start gap-2.5">
-                          <div className="mt-0.5 p-0.5 rounded-full bg-cyan-500/10 text-cyan-400 shrink-0">
-                            <Check className="w-3.5 h-3.5" />
-                          </div>
-                          <span className="text-xs text-gray-300 font-light leading-snug">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    )}
                   </div>
-
-                  {/* Card Bottom CTA */}
-                  <div className="pt-2">
-                    <button
-                      onClick={() => handleSelect(plan.name)}
-                      className={`w-full py-3.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 ${
-                        plan.featured
-                          ? 'bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 text-black font-black hover:opacity-95 shadow-lg shadow-cyan-500/30 hover:scale-[1.02]'
-                          : 'bg-white/[0.07] hover:bg-white/[0.12] text-white border border-white/10'
-                      }`}
-                    >
-                      <span>{plan.ctaText}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
+                  <div className="text-right">
+                    <p className="text-3xl font-black text-white sm:text-4xl">{activePlan.price}</p>
+                    <p className="mt-1 text-xs text-gray-400">{activePlan.period}</p>
                   </div>
                 </div>
-              </Card3D>
-            </div>
-          ))}
+
+                <p className="mt-5 max-w-2xl text-sm leading-relaxed text-gray-300">{activePlan.tagline}</p>
+
+                <ul className="mt-6 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-2">
+                  {activePlan.deliverables.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-xs leading-relaxed text-gray-300">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
+                      <span>{item.replace(/^✅\s*/, '')}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  type="button"
+                  onClick={() => handleSelect(activePlan.name)}
+                  className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-300 to-blue-400 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-950 transition hover:brightness-110 sm:w-auto"
+                >
+                  {activePlan.ctaText} <ArrowUpRight className="h-4 w-4" />
+                </button>
+              </motion.article>
+            </AnimatePresence>
+          </Card3D>
+
+          <button
+            type="button"
+            onClick={() => movePlan(1)}
+            disabled={activeIndex === filteredPlans.length - 1}
+            aria-label="Next plan"
+            className="hidden h-12 w-12 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-cyan-300/50 hover:text-cyan-200 disabled:cursor-not-allowed disabled:opacity-30 md:flex"
+          >
+            <ArrowRight className="h-5 w-5" />
+          </button>
         </div>
 
-        {/* Quick direct discovery call banner with Akash Kaushal */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#090d18]/85 border border-cyan-500/30 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-          <div>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-400 block mb-1">
-              Direct Strategy Hotline &bull; D2C Growth
-            </span>
-            <h4 className="text-lg sm:text-xl font-bold text-white font-mono">
-              Ready to scale your brand or book a commercial photo shoot?
-            </h4>
-            <p className="text-xs sm:text-sm text-gray-400 font-light mt-1">
-              Connect directly with Akash Kaushal ({agencyConfig.contact.phoneDisplay}) or email {agencyConfig.contact.email}.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <a
-              href={agencyConfig.contact.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 transition-all"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp Akash</span>
-            </a>
-            <button
-              onClick={() => handleSelect('COMPLETE GROWTH PACKAGE')}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-wider bg-gradient-to-r from-cyan-400 to-blue-500 text-black shadow-lg shadow-cyan-500/20 transition-all"
-            >
-              <span>Book 10–15 Min Call</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
-          </div>
+        <div className="mx-auto mt-5 flex max-w-4xl items-center justify-between gap-4">
+          <button
+            type="button"
+            onClick={() => movePlan(-1)}
+            disabled={activeIndex === 0}
+            className="inline-flex items-center gap-1 text-xs text-gray-300 hover:text-white disabled:opacity-30 md:hidden"
+          >
+            <ArrowLeft className="h-4 w-4" /> Previous
+          </button>
+          <p className="text-center font-mono text-xs text-gray-400" aria-live="polite">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(filteredPlans.length).padStart(2, '0')}
+          </p>
+          <button
+            type="button"
+            onClick={() => movePlan(1)}
+            disabled={activeIndex === filteredPlans.length - 1}
+            className="inline-flex items-center gap-1 text-xs text-gray-300 hover:text-white disabled:opacity-30 md:hidden"
+          >
+            Next <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
+
+        <p className="mt-8 text-center text-[11px] leading-relaxed text-gray-500">
+          {pricingConfig.currencyNotice}
+        </p>
       </div>
     </section>
   );
