@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, X, ExternalLink, CheckCircle } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 import { portfolioCategories, portfolioProjects, ProjectItem } from '@/data/projects';
 import Card3D from './3d/Card3D';
 
@@ -65,11 +66,13 @@ export default function Portfolio() {
                 <div className="relative rounded-2xl overflow-hidden bg-[#0c101c]/80 backdrop-blur-xl border border-white/[0.08] hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col justify-between shadow-2xl">
                   {/* Image Preview with Overlay */}
                   <div className="relative aspect-[16/10] overflow-hidden bg-black">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-80"
+                      fill
+                      unoptimized
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-80"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0c101c] via-[#0c101c]/40 to-transparent" />
 
@@ -168,10 +171,13 @@ export default function Portfolio() {
               </div>
 
               <div className="relative aspect-[21/9] rounded-2xl overflow-hidden mb-8 border border-white/[0.08]">
-                <img
+                <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  unoptimized
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover"
                 />
               </div>
 

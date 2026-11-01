@@ -1,7 +1,6 @@
-const puppeteer = require('puppeteer-core');
-const path = require('path');
-
 async function capture() {
+  const { default: puppeteer } = await import('puppeteer-core');
+  const path = await import('node:path');
   const artifactDir = 'C:\\Users\\Admin\\.gemini\\antigravity\\brain\\7df1e92c-8629-48b7-a818-14a974b2139f';
   const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 

@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Compass, Shield, Flame, CheckCircle2, Phone, Mail, MessageCircle } from 'lucide-react';
+import { Compass, Shield, Flame, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
 import { agencyConfig } from '@/data/agency';
 import Card3D from './3d/Card3D';
 
@@ -67,7 +66,7 @@ export default function About() {
 
           {/* Right Column: Values Pillars with 3D tilt */}
           <div className="lg:col-span-5 flex flex-col gap-5">
-            {ABOUT_PILLARS.map((pillar, idx) => {
+            {ABOUT_PILLARS.map((pillar) => {
               const Icon = pillar.icon;
               return (
                 <Card3D key={pillar.title} intensity={10}>

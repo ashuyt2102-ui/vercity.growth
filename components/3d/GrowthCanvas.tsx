@@ -5,6 +5,11 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
+function seededValue(seed: number) {
+  const value = Math.sin(seed * 127.1) * 43758.5453;
+  return value - Math.floor(value);
+}
+
 // Metallic Growth Core Sculpture
 function GrowthCore({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number }> }) {
   const meshRef = useRef<THREE.Mesh>(null!);
@@ -124,9 +129,9 @@ function ParticleField({ count = 90 }: { count?: number }) {
   const points = useMemo(() => {
     const coords = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const theta = THREE.MathUtils.randFloatSpread(360);
-      const phi = THREE.MathUtils.randFloatSpread(360);
-      const distance = 2.4 + Math.random() * 3.5;
+      const theta = (seededValue(i * 2 + 1) - 0.5) * 360;
+      const phi = (seededValue(i * 2 + 2) - 0.5) * 360;
+      const distance = 2.4 + seededValue(i + count) * 3.5;
 
       coords[i * 3] = distance * Math.sin(theta) * Math.cos(phi);
       coords[i * 3 + 1] = distance * Math.sin(theta) * Math.sin(phi);

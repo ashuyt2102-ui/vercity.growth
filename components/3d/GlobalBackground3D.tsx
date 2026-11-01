@@ -5,6 +5,11 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
+function seededValue(seed: number) {
+  const value = Math.sin(seed * 127.1) * 43758.5453;
+  return value - Math.floor(value);
+}
+
 // 1. Constellation Star & Particle Corridor
 function UniverseParticles({ count = 300 }: { count?: number }) {
   const pointsRef = useRef<THREE.Points>(null!);
@@ -18,9 +23,9 @@ function UniverseParticles({ count = 300 }: { count?: number }) {
     const c3 = new THREE.Color('#60a5fa');
 
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 32;
-      pos[i * 3 + 1] = Math.random() * 40 - 32;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 20;
+      pos[i * 3] = (seededValue(i * 3 + 1) - 0.5) * 32;
+      pos[i * 3 + 1] = seededValue(i * 3 + 2) * 40 - 32;
+      pos[i * 3 + 2] = (seededValue(i * 3 + 3) - 0.5) * 20;
 
       const chosen = i % 3 === 0 ? c1 : i % 3 === 1 ? c2 : c3;
       col[i * 3] = chosen.r;
