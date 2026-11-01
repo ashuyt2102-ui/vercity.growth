@@ -1,15 +1,15 @@
 import Link from 'next/link';
-import { ArrowUpRight, ChartNoAxesCombined, CircleDollarSign, Compass, MessageSquareQuote, UserRound } from 'lucide-react';
+import { ArrowUpRight, CircleDollarSign, Compass, MessageSquareQuote } from 'lucide-react';
 import Hero from '@/components/Hero';
 import PortalPageLayout from '@/components/PortalPageLayout';
+import Services from '@/components/Services';
+import ResultsHighlights from '@/components/ResultsHighlights';
+import FoundersHighlights from '@/components/FoundersHighlights';
 
 const destinations = [
-  { title: 'Services', description: 'Explore the ways we help brands grow.', href: '/services', icon: Compass },
-  { title: 'Results', description: 'See the numbers behind our work.', href: '/results', icon: ChartNoAxesCombined },
   { title: 'Stories', description: 'Meet the ideas and perspectives behind the studio.', href: '/stories', icon: MessageSquareQuote },
   { title: 'Pricing', description: 'Find a plan that fits your next move.', href: '/pricing', icon: CircleDollarSign },
   { title: 'About', description: 'Get to know the principles behind Vercity Growth.', href: '/about', icon: Compass },
-  { title: 'Founders', description: 'Meet the people building Vercity Growth.', href: '/founders', icon: UserRound },
   { title: 'Contact', description: 'Tell us about your brand and goals.', href: '/contact', icon: ArrowUpRight },
 ];
 
@@ -18,7 +18,10 @@ export default function Home() {
     <PortalPageLayout>
       <div>
         <Hero />
-        <section aria-label="Explore Vercity Growth" className="border-t border-white/[0.06] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <Services />
+        <ResultsHighlights heading="The numbers so far" />
+        <FoundersHighlights />
+        <section aria-label="Explore more of Vercity Growth" className="border-t border-white/[0.06] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <div className="mx-auto grid max-w-6xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {destinations.map(({ title, description, href, icon: Icon }) => (
               <Link
