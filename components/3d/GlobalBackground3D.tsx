@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
+import { Float, MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
 function seededValue(seed: number) {
@@ -62,75 +62,128 @@ function UniverseParticles({ count = 300 }: { count?: number }) {
 
 // 2. Hero 3D Sculpture: Metallic Growth Core
 function HeroSculpture() {
+  const groupRef = useRef<THREE.Group>(null!);
   const coreRef = useRef<THREE.Mesh>(null!);
   const ring1 = useRef<THREE.Mesh>(null!);
   const ring2 = useRef<THREE.Mesh>(null!);
+  const ring3 = useRef<THREE.Mesh>(null!);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
+    const dt = Math.min(delta, 0.05);
+    const isMobile = state.size.width < 768;
+
+    groupRef.current.position.x = THREE.MathUtils.damp(
+      groupRef.current.position.x,
+      isMobile ? 0 : 3.2,
+      3,
+      dt,
+    );
+    const targetScale = isMobile ? 0.56 : 1;
+    const scale = THREE.MathUtils.damp(groupRef.current.scale.x, targetScale, 3, dt);
+    groupRef.current.scale.setScalar(scale);
+
     if (coreRef.current) {
-      coreRef.current.rotation.x += delta * 0.2;
-      coreRef.current.rotation.y += delta * 0.25;
+      coreRef.current.rotation.x += dt * 0.12;
+      coreRef.current.rotation.y += dt * 0.16;
     }
     if (ring1.current) {
-      ring1.current.rotation.x += delta * 0.35;
-      ring1.current.rotation.z += delta * 0.25;
+      ring1.current.rotation.x += dt * 0.24;
+      ring1.current.rotation.z += dt * 0.16;
     }
     if (ring2.current) {
-      ring2.current.rotation.y += delta * 0.3;
-      ring2.current.rotation.x -= delta * 0.2;
+      ring2.current.rotation.y += dt * 0.18;
+      ring2.current.rotation.x -= dt * 0.12;
     }
+    if (ring3.current) ring3.current.rotation.z += dt * 0.1;
   });
 
   return (
-    <group position={[3.2, 0.2, -0.5]}>
-      {/* Central Metallic Core */}
-      <Float speed={2} rotationIntensity={0.4} floatIntensity={1}>
-        <mesh ref={coreRef}>
+    <group ref={groupRef} position={[3.2, 0.2, -0.5]}>
+      <mesh scale={1.035}>
+        <icosahedronGeometry args={[1.4, 2]} />
+        <meshBasicMaterial
+          color="#67e8f9"
+          transparent
+          opacity={0.09}
+          wireframe
+          depthWrite={false}
+          toneMapped={false}
+        />
+      </mesh>
+
+      <Float speed={1.25} rotationIntensity={0.12} floatIntensity={0.18}>
+        <mesh ref={coreRef} castShadow>
           <icosahedronGeometry args={[1.4, 3]} />
-          <meshStandardMaterial
+          <MeshDistortMaterial
             color="#1e293b"
-            roughness={0.15}
-            metalness={0.92}
+            roughness={0.2}
+            metalness={0.82}
             emissive="#0f172a"
+            distort={0.2}
+            speed={1.1}
+            clearcoat={1}
+            clearcoatRoughness={0.14}
           />
         </mesh>
       </Float>
 
-      {/* Orbital Neon Blue Ring */}
       <mesh ref={ring1}>
-        <torusGeometry args={[2.4, 0.035, 16, 64]} />
+        <torusGeometry args={[2.25, 0.04, 20, 128]} />
         <meshStandardMaterial
-          color="#38bdf8"
+          color="#7dd3fc"
           emissive="#0284c7"
-          emissiveIntensity={1.2}
-          roughness={0.2}
-          metalness={0.9}
+          emissiveIntensity={1.1}
+          roughness={0.22}
+          metalness={0.76}
         />
       </mesh>
 
-      {/* Orbital Violet Angle Ring */}
       <mesh ref={ring2} rotation={[Math.PI / 3, 0, 0]}>
-        <torusGeometry args={[3.0, 0.025, 16, 64]} />
+        <torusGeometry args={[2.82, 0.027, 16, 128]} />
         <meshStandardMaterial
-          color="#818cf8"
+          color="#a5b4fc"
           emissive="#4f46e5"
-          emissiveIntensity={0.9}
-          roughness={0.2}
-          metalness={0.9}
+          emissiveIntensity={0.82}
+          roughness={0.24}
+          metalness={0.74}
         />
       </mesh>
 
-      {/* Satellite Floating Nodes */}
+      <mesh ref={ring3} rotation={[-Math.PI / 4, Math.PI / 6, 0]}>
+        <torusGeometry args={[3.25, 0.018, 12, 144]} />
+        <meshStandardMaterial
+          color="#c4b5fd"
+          emissive="#7c3aed"
+          emissiveIntensity={0.58}
+          roughness={0.3}
+          metalness={0.68}
+        />
+      </mesh>
+
       <Float speed={2.5} floatIntensity={1.2}>
         <mesh position={[-2.2, 1.8, 0.5]}>
           <octahedronGeometry args={[0.2, 0]} />
-          <meshStandardMaterial color="#06b6d4" emissive="#06b6d4" emissiveIntensity={1} />
+          <meshStandardMaterial
+            color="#67e8f9"
+            emissive="#06b6d4"
+            emissiveIntensity={1.1}
+            metalness={0.6}
+            roughness={0.18}
+            toneMapped={false}
+          />
         </mesh>
       </Float>
       <Float speed={2} floatIntensity={1}>
         <mesh position={[2.4, -1.6, -0.4]}>
           <icosahedronGeometry args={[0.22, 0]} />
-          <meshStandardMaterial color="#60a5fa" emissive="#2563eb" emissiveIntensity={0.8} />
+          <meshStandardMaterial
+            color="#93c5fd"
+            emissive="#2563eb"
+            emissiveIntensity={0.9}
+            metalness={0.6}
+            roughness={0.18}
+            toneMapped={false}
+          />
         </mesh>
       </Float>
     </group>
@@ -213,32 +266,37 @@ function SceneController({
 }) {
   const currentScroll = useRef(0);
 
-  useFrame((state) => {
-    currentScroll.current = THREE.MathUtils.lerp(
+  useFrame((state, delta) => {
+    const dt = Math.min(delta, 0.05);
+    currentScroll.current = THREE.MathUtils.damp(
       currentScroll.current,
       scrollProgress.current,
-      0.06
+      3.5,
+      dt,
     );
 
     const targetY = -currentScroll.current * 30;
-    state.camera.position.y = THREE.MathUtils.lerp(
+    state.camera.position.y = THREE.MathUtils.damp(
       state.camera.position.y,
       targetY + mouse.current.y * 0.5,
-      0.08
+      3.5,
+      dt,
     );
 
     const targetX = mouse.current.x * 0.7;
-    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, targetX, 0.06);
+    state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, targetX, 3.5, dt);
 
-    state.camera.rotation.y = THREE.MathUtils.lerp(
+    state.camera.rotation.y = THREE.MathUtils.damp(
       state.camera.rotation.y,
       mouse.current.x * 0.06,
-      0.05
+      3,
+      dt,
     );
-    state.camera.rotation.x = THREE.MathUtils.lerp(
+    state.camera.rotation.x = THREE.MathUtils.damp(
       state.camera.rotation.x,
       -mouse.current.y * 0.05,
-      0.05
+      3,
+      dt,
     );
   });
 
@@ -250,11 +308,19 @@ export default function GlobalBackground3D() {
   const scrollProgress = useRef(0);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: PointerEvent) => {
       mouse.current = {
         x: (e.clientX / window.innerWidth) * 2 - 1,
         y: -((e.clientY / window.innerHeight) * 2 - 1),
       };
+    };
+
+    const resetPointer = () => {
+      mouse.current = { x: 0, y: 0 };
+    };
+
+    const handlePointerOut = (event: PointerEvent) => {
+      if (!event.relatedTarget) resetPointer();
     };
 
     const handleScroll = () => {
@@ -264,11 +330,16 @@ export default function GlobalBackground3D() {
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerout', handlePointerOut, { passive: true });
+    window.addEventListener('blur', resetPointer);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerout', handlePointerOut);
+      window.removeEventListener('blur', resetPointer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -282,7 +353,7 @@ export default function GlobalBackground3D() {
           alpha: true,
           powerPreference: 'high-performance',
         }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 15, 10]} intensity={1.4} color="#ffffff" />
