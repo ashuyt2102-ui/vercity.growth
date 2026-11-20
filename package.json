@@ -1,5 +1,5 @@
 {
-  "name": "vercity-growth",
+  "name": "gravitiesite",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,34 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^7.0.1",
-    "@react-three/drei": "^10.7.9",
-    "@react-three/fiber": "^9.8.2",
-    "@supabase/supabase-js": "^2.118.0",
-    "@types/canvas-confetti": "^1.9.0",
-    "@types/three": "^0.187.0",
-    "canvas-confetti": "^1.9.4",
-    "clsx": "^2.1.1",
-    "framer-motion": "^14.9.0",
-    "gsap": "^3.15.0",
-    "lucide-react": "^1.66.0",
-    "next": "16.4.3",
+    "next": "16.4.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "react-hook-form": "^7.91.0",
-    "resend": "^6.37.0",
-    "tailwind-merge": "^3.7.0",
-    "three": "^0.187.0",
-    "zod": "^4.6.7"
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@tailwindcss/turbopack": "^4",
+    "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.4.3",
-    "tailwindcss": "^4",
+    "eslint-config-next": "16.4.6",
+    "tailwindcss": "4.3.3",
     "typescript": "^5"
   }
 }

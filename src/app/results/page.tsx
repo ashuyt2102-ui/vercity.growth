@@ -1,0 +1,3 @@
+export default function ResultsPage() {
+ return <main><header className="page-hero"><p className="eyebrow">Our results</p><h1>The numbers so far.</h1><p>A snapshot of the work and campaign figures shared by Vercity Growth.</p></header><section className="numbers section-pad numbers-page"><div className="number-grid"><div><strong>30+</strong><span>Websites built</span></div><div><strong>8x+</strong><span>Top ROAS</span></div><div><strong>₹5 lakh</strong><span>Total ad spend</span></div></div><p className="disclaimer">Historical figures shared by Vercity Growth; results vary by brand and campaign.</p></section></main>;
+}
