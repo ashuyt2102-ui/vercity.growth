@@ -1,4 +1,28 @@
 import Link from "next/link";
+
 export default function AboutPage() {
- return <main><header className="page-hero"><p className="eyebrow">About Vercity Growth</p><h1>Good growth starts with a clear direction.</h1><p>Vercity Growth is a digital growth studio bringing strategy, creative, and performance together to help ambitious brands move forward.</p></header><section className="section-pad"><div className="about-grid"><article className="spatial-card"><h2>Strategy with direction</h2><p>We connect your brand goals to a clear plan across marketing, creative, and digital experiences.</p></article><article className="spatial-card"><h2>Creative that moves</h2><p>We make thoughtful, distinctive creative designed to earn attention and make your brand memorable.</p></article><article className="spatial-card"><h2>Built for lasting growth</h2><p>We focus on strong foundations, considered experimentation, and progress you can understand.</p></article></div><div className="section-heading" style={{marginTop:60}}><div><p className="eyebrow">Meet the people behind the studio.</p><h2>Founders</h2></div><Link className="text-link" href="/founders">Meet the founders →</Link></div></section></main>;
+  return (
+    <main>
+      <header className="page-hero">
+        <p className="eyebrow">About Vercity Growth</p>
+        <h1>Growth is the brief.</h1>
+        <p>Performance-first digital marketing, built around outcomes.</p>
+      </header>
+      <section className="section-pad">
+        <div className="about-grid">
+          <article className="spatial-card"><h2>Build</h2><p>We connect marketing strategy with purposeful creative and performance media.</p></article>
+          <article className="spatial-card"><h2>Measure</h2><p>We use clear reporting to understand campaign performance and guide decisions.</p></article>
+          <article className="spatial-card"><h2>Multiply</h2><p>We turn what we learn into sharper creative and considered next steps for growth.</p></article>
+        </div>
+        <div className="sector-list">
+          <p className="eyebrow">Sectors</p>
+          <p>Fashion <span>·</span> Jewellery <span>·</span> Education <span>·</span> Property <span>·</span> D2C</p>
+        </div>
+        <div className="section-heading" style={{ marginTop: 60 }}>
+          <div><p className="eyebrow">Meet the people behind the studio</p><h2>Founders</h2></div>
+          <Link className="text-link" href="/founders">Meet the founders →</Link>
+        </div>
+      </section>
+    </main>
+  );
 }

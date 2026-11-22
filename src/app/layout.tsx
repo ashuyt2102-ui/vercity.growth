@@ -5,11 +5,11 @@ import Image from "next/image";
 import SpaceBackdrop from "../components/SpaceBackdrop";
 
 export const metadata: Metadata = {
-  title: "VERCITY GROWTH — We Engineer Digital Growth",
-  description: "Strategy, creative, and performance marketing by Vercity Growth.",
+  title: "Vercity Growth — Performance & Creative",
+  description: "Performance media, creative production, and growth strategy for ambitious brands.",
 };
 
-const whatsapp = "https://wa.me/918851384747?text=Hi%20Akash%2C%20I%20would%20like%20to%20book%20a%20quick%2010-15%20min%20call%20to%20grow%20my%20brand.";
+const whatsapp = "https://wa.me/918851384747?text=Hi%20Akash%2C%20I%20would%20like%20to%20discuss%20performance%20marketing%20and%20creative%20for%20my%20brand.";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -17,9 +17,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <SpaceBackdrop />
         <nav className="navbar" aria-label="Primary navigation">
-          <Link className="brand" href="/"><Image src="/vercity-logo.jpg" alt="" width={28} height={28} /><span><strong>VERCITY</strong><b>GROWTH</b><small>ENGINEERED ROI</small></span></Link>
+          <Link className="brand" href="/"><Image src="/vercity-logo.jpg" alt="" width={28} height={28} /><span><strong>VERCITY</strong><b>GROWTH</b><small>PERFORMANCE</small></span></Link>
           <div className="nav-links">
-            {[["Home", "/"], ["Services", "/services"], ["Results", "/results"], ["Stories", "/stories"], ["Pricing", "/pricing"], ["About", "/about"], ["Founders", "/founders"], ["Contact", "/contact"]].map(([label, href]) => <Link href={href} key={label}>{label}</Link>)}
+            {[["Home", "/"], ["Services", "/services"], ["Results", "/results"], ["Selected Work", "/stories"], ["Pricing", "/pricing"], ["About", "/about"], ["Founders", "/founders"], ["Contact", "/contact"]].map(([label, href]) => <Link href={href} key={label}>{label}</Link>)}
           </div>
           <div className="nav-actions"><a className="phone" href="tel:+918851384747">+91 88513 84747</a><Link className="call-button" href="/contact">10–15 MIN CALL <span>↗</span></Link></div>
         </nav>
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <footer className="site-footer">
           <div className="footer-intro">
             <Link className="footer-brand" href="/"><span className="brand-mark">▲</span> VERCITY GROWTH</Link>
-            <p>Strategy, creative, and performance marketing for ambitious brands.</p>
+            <p>Performance media, creative production, and growth strategy for ambitious brands.</p>
           </div>
           <nav className="footer-col" aria-label="Studio links">
             <h2>Studio</h2>
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </nav>
           <nav className="footer-col" aria-label="Company links">
             <h2>Company</h2>
-            <Link href="/about">About</Link><Link href="/founders">Founders</Link><Link href="/stories">Stories</Link>
+            <Link href="/about">About</Link>            <Link href="/founders">Founders</Link><Link href="/stories">Selected Work</Link>
           </nav>
           <div className="footer-col">
             <h2>Connect</h2>

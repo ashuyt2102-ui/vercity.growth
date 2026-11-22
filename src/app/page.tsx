@@ -6,48 +6,37 @@ import { useEffect } from "react";
 
 const services = [
   {
-    icon: "workflow",
-    category: "Visual Assets & E-Commerce",
-    title: "Studio & Commercial Photo Shoot",
-    description: "Commercial e-commerce product photography, fashion lookbooks, and high-CTR lifestyle shoots starting from ₹10,000.",
-    details: ["High-CTR ad creatives", "Ultra HD e-commerce resolution", "3–5 day fast delivery"],
+    icon: "analytics",
+    category: "Performance",
+    title: "Performance Ads",
+    description: "Meta and Google campaigns built around conversion, return, and measurable outcomes.",
+    details: ["Meta Ads", "Google Ads", "Conversion-focused"],
   },
   {
-    icon: "analytics",
-    category: "Acquisition & ROAS",
-    title: "Performance Marketing (Meta Ads)",
-    description: "Meta Ads (Facebook & Instagram), campaign structure, CAPI tracking, and weekly ROAS scaling.",
-    details: ["Full funnel attribution", "Creative fatigue prevention", "Conversion-first bidding"],
+    icon: "workflow",
+    category: "Creative",
+    title: "Creative Production",
+    description: "Product imagery, campaign assets, reels, and content shaped for each brand.",
+    details: ["Product imagery", "Campaign assets", "Reels and content"],
   },
   {
     icon: "leads",
-    category: "Brand Equity & Community",
-    title: "Social Media Management",
-    description: "Content architecture, Instagram management, 20–30 posts, in-house reels, and brand growth.",
-    details: ["Algorithmic reach", "Community engagement", "Consistent brand tone"],
-  },
-  {
-    icon: "bolt",
-    category: "UX & CRO Engineering",
-    title: "Website Development",
-    description: "Shopify, WordPress, bespoke landing pages, and custom Next.js e-commerce platforms.",
-    details: ["95+ Core Web Vitals", "Frictionless checkout flows", "Modern interactive stack"],
+    category: "Strategy",
+    title: "Growth Strategy",
+    description: "Connect marketing strategy, purposeful creative, and performance data to find the next move.",
+    details: ["Clear priorities", "Connected channels", "Practical decisions"],
   },
   {
     icon: "shield",
-    category: "Visual Identity",
-    title: "Branding & Graphic Design",
-    description: "Brand identity, ad creative design packs, typography systems, and packaging mockups.",
-    details: ["Distinct brand recall", "High-CTR creative assets", "Scalable design system"],
-  },
-  {
-    icon: "globe",
-    category: "Retention & Storytelling",
-    title: "Video Editing & Content Creation",
-    description: "Reels, promotional videos, UGC-style advertisements, motion graphics, and short-form storytelling.",
-    details: ["3-second hook retention", "Dynamic kinetic editing", "Platform-native formatting"],
+    category: "Measurement",
+    title: "Reporting & Analytics",
+    description: "Clear reporting across campaigns helps teams understand performance and make informed decisions.",
+    details: ["Performance reporting", "Campaign insights", "Outcome-focused"],
   },
 ] as const;
+
+const sectors = ["Fashion", "Jewellery", "Education", "Property", "D2C"] as const;
+const selectedBrands = ["Grescle", "Cilaire", "Testrosclothing", "Daebak", "RentRelay"] as const;
 
 const founders = [
   ["akash-kaushal.jpeg", "Akash Kaushal, Founder of Vercity Growth", "Founder", "Akash Kaushal"],
@@ -71,7 +60,7 @@ function ArrowIcon() {
 }
 
 export default function Home() {
-  const whatsapp = "https://wa.me/918851384747?text=Hi%20Akash%2C%20I%20would%20like%20to%20book%20a%20quick%2010-15%20min%20call%20to%20grow%20my%20brand.";
+  const whatsapp = "https://wa.me/918851384747?text=Hi%20Akash%2C%20I%20would%20like%20to%20discuss%20performance%20marketing%20and%20creative%20for%20my%20brand.";
 
   useEffect(() => {
     const revealItems = document.querySelectorAll<HTMLElement>("[data-reveal]");
@@ -102,25 +91,25 @@ export default function Home() {
     <main id="top">
       <header className="hero">
         <div className="hero-inner">
-          <p className="eyebrow" data-reveal style={{ "--rd": "60ms" } as React.CSSProperties}>Vercity Growth · Digital studio</p>
-          <h1 className="hero-title" data-reveal style={{ "--rd": "120ms" } as React.CSSProperties}>Step into your next <em>growth era.</em></h1>
-          <p className="hero-sub" data-reveal style={{ "--rd": "200ms" } as React.CSSProperties}>Strategy, creative, and performance marketing—built to move your brand forward.</p>
+          <p className="eyebrow" data-reveal style={{ "--rd": "60ms" } as React.CSSProperties}>Performance &amp; creative · Agency portfolio 2026</p>
+          <h1 className="hero-title" data-reveal style={{ "--rd": "120ms" } as React.CSSProperties}>We don&apos;t just market. <em>We multiply.</em></h1>
+          <p className="hero-sub" data-reveal style={{ "--rd": "200ms" } as React.CSSProperties}>Performance media, creative production, and growth strategy for ambitious brands.</p>
           <div className="hero-actions" data-reveal style={{ "--rd": "300ms" } as React.CSSProperties}>
-            <Link className="btn btn-primary" href="/services">Explore the studio <ArrowIcon /></Link>
-            <a className="btn btn-outline" href={whatsapp}>Book a 10–15 min call</a>
+            <Link className="btn btn-primary" href="/services">Explore our capabilities <ArrowIcon /></Link>
+            <a className="btn btn-outline" href={whatsapp}>Talk about your next move</a>
           </div>
         </div>
         <div className="logos" data-reveal style={{ "--rd": "420ms" } as React.CSSProperties}>
-          <p className="logos-label">One studio, many ways forward</p>
-          <div className="logos-row">{services.map((service) => <span className="logo" key={service.title}>{service.title}</span>)}</div>
+          <p className="logos-label">Meta Ads · Google Ads · Creative · Strategy</p>
+          <div className="logos-row">{sectors.map((sector) => <span className="logo" key={sector}>{sector}</span>)}</div>
         </div>
       </header>
 
       <section className="section features" id="services">
         <div className="section-head">
-          <span className="eyebrow">One studio, many ways forward</span>
-          <h2 data-reveal style={{ "--rd": "80ms" } as React.CSSProperties}>What we do</h2>
-          <p data-reveal style={{ "--rd": "160ms" } as React.CSSProperties}>Pick a direction. We&apos;ll help you find the right next step.</p>
+          <span className="eyebrow">What we do</span>
+          <h2 data-reveal style={{ "--rd": "80ms" } as React.CSSProperties}>Creative thinking. Real results.</h2>
+          <p data-reveal style={{ "--rd": "160ms" } as React.CSSProperties}>A connected approach across media, creative, strategy, and reporting.</p>
         </div>
         <div className="feature-grid">
           {services.map((service, index) => (
@@ -139,33 +128,45 @@ export default function Home() {
         <div className="showcase-grid">
           <div className="showcase-copy">
             <span className="eyebrow">Built on real outcomes</span>
-            <h2 data-reveal style={{ "--rd": "90ms" } as React.CSSProperties}>Bring the moving parts of growth together.</h2>
-            <p data-reveal style={{ "--rd": "180ms" } as React.CSSProperties}>Vercity Growth brings strategy, creative, and performance together under one roof—so your next step feels clear and your brand can keep moving forward.</p>
+            <h2 data-reveal style={{ "--rd": "90ms" } as React.CSSProperties}>Build. Measure. Multiply.</h2>
+            <p data-reveal style={{ "--rd": "180ms" } as React.CSSProperties}>We connect marketing strategy, purposeful creative, and performance data to help brands grow with clarity.</p>
             <Link className="btn btn-primary" href="/results" data-reveal style={{ "--rd": "270ms" } as React.CSSProperties}>See the results <ArrowIcon /></Link>
           </div>
           <div className="dashboard spatial-card" data-reveal style={{ "--rd": "160ms" } as React.CSSProperties}>
             <div className="dash-top"><div><span className="dash-overline">VERCITY GROWTH</span><h3>Studio snapshot</h3></div><span className="dash-live"><i /> Growth</span></div>
             <div className="dash-services">
-              <div><span className="dash-service-icon">↗</span><span><b>Strategy</b><small>A clear direction for your next move</small></span></div>
-              <div><span className="dash-service-icon">✳</span><span><b>Creative</b><small>Distinctive work made to earn attention</small></span></div>
-              <div><span className="dash-service-icon">◌</span><span><b>Performance</b><small>Considered campaigns and optimization</small></span></div>
+              <div><span className="dash-service-icon">↗</span><span><b>Performance Ads</b><small>Meta and Google campaigns built for return</small></span></div>
+              <div><span className="dash-service-icon">✳</span><span><b>Creative Production</b><small>Product imagery, campaign assets, and content</small></span></div>
+              <div><span className="dash-service-icon">◌</span><span><b>Growth Strategy</b><small>Clear decisions informed by performance data</small></span></div>
             </div>
-            <div className="dash-footer"><span>Built around your brand</span><Link href="/about">How we work <ArrowIcon /></Link></div>
+            <div className="dash-footer"><span>10 brands featured</span><Link href="/stories">Explore selected work <ArrowIcon /></Link></div>
           </div>
         </div>
         <div className="stats">
-          <article className="stat spatial-card" data-reveal style={{ "--rd": "0ms" } as React.CSSProperties}><strong>30+</strong><span>Websites built</span></article>
-          <article className="stat spatial-card" data-reveal style={{ "--rd": "80ms" } as React.CSSProperties}><strong>8x+</strong><span>Top ROAS</span></article>
-          <article className="stat spatial-card" data-reveal style={{ "--rd": "160ms" } as React.CSSProperties}><strong>₹5 lakh</strong><span>Total ad spend</span></article>
+          <article className="stat spatial-card" data-reveal style={{ "--rd": "0ms" } as React.CSSProperties}><strong>10</strong><span>Brands featured</span></article>
+          <article className="stat spatial-card" data-reveal style={{ "--rd": "80ms" } as React.CSSProperties}><strong>3,589%</strong><span>Reported Google Ads ROAS</span></article>
+          <article className="stat spatial-card" data-reveal style={{ "--rd": "160ms" } as React.CSSProperties}><strong>12.51x</strong><span>Best Meta ad-set ROAS</span></article>
         </div>
-        <p className="stats-note">Historical figures shared by Vercity Growth; results vary by brand and campaign.</p>
+        <p className="stats-note">Reported campaign results from the 2026 portfolio. Results vary by campaign and period; see the reporting dates on our results page.</p>
+      </section>
+
+      <section className="section clients-section" id="clients">
+        <div className="section-head">
+          <span className="eyebrow">Selected clients</span>
+          <h2>Brands we have worked with.</h2>
+          <p>A selection of collaborations across apparel, lifestyle, and property services.</p>
+        </div>
+        <div className="client-list">
+          {selectedBrands.map((brand) => <span className="client-name spatial-card" key={brand}>{brand}</span>)}
+        </div>
+        <Link className="text-link" href="/stories">View selected work <ArrowIcon /></Link>
       </section>
 
       <section className="section founders-section" id="founders">
         <div className="section-head">
           <span className="eyebrow">The people behind Vercity</span>
           <h2>Meet our founders</h2>
-          <p>The people building Vercity Growth and shaping its next chapter.</p>
+          <p>Meet the people behind Vercity Growth.</p>
         </div>
         <div className="founder-grid">
           {founders.map(([src, alt, role, name]) => (
@@ -181,8 +182,8 @@ export default function Home() {
       <section className="section cta" id="contact">
         <div className="cta-card spatial-card">
           <span className="eyebrow">Ready for your next move?</span>
-          <h2>Let&apos;s build something that grows.</h2>
-          <p>Tell us about your brand and goals. We&apos;ll help you find the right next step.</p>
+          <h2>Work with Vercity Growth.</h2>
+          <p>Performance marketing, strong creative, and clearer decisions for what comes next.</p>
           <div className="hero-actions">
             <Link className="btn btn-primary" href="/contact">Talk to Vercity <ArrowIcon /></Link>
             <a className="btn btn-outline" href={whatsapp}>WhatsApp · +91 88513 84747</a>
